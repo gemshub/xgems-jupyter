@@ -1,0 +1,39 @@
+# writting a function that calculates the dissolution rate 
+
+# A Python function is a reusable block of code that performs a specific task.  
+# You define it using `def`, give it a name, optionally specify input parameters, and use `return` to output a result.  
+
+#This function calculates the quartz dissolution rate based on temperature (T), surface area (S), saturation state (omega), and activities of H⁺ (aHplus) and OH⁻ (aOHminus).  
+#It computes contributions from neutral, acid, and base reaction mechanisms using given constants and returns their sum as the overall dissolution rate.
+
+def qtz_dissolution_rate(T,S,omega,aHplus,aOHminus):
+    
+    # parameters for neutral mechanism
+    k_nu=6.4e-14
+    Ea_nu=77*1000.0 # to J
+
+    #Acid mechanism depends on H+
+    k_H=0.0 # switch off acid mechanism
+    Ea_H=0.0 # to J
+    n_H=0.0 # exponent for H+ activity
+    
+    
+    #parameters for base mechanism depends on OH-
+    k_OH=1.9e-10
+    Ea_OH=80.0*1000.0 # to J
+    n_OH=0.34 # exponent for H+ activity    
+
+    # other parameters
+    R=8.314462618
+
+    # calculate in parts
+    T_nu_term = np.exp( (-Ea_nu)/R*(1.0/T-1.0/298.15) )
+    neutral_term=k_nu*T_nu_term*S*(1.0-omega) 
+    T_OH_term=np.exp( (1.0/T-1.0/298.15)*(-1.0)*Ea_OH/R )*pow(aOHminus,n_OH)
+    base_term= k_OH*T_OH_term*S*(1.0-omega) # or pH like in the other scripts
+    T_H_term=np.exp( (1.0/T-1.0/298.15)*(-1.0)*Ea_H/R )*pow(aHplus,(n_H))
+    acid_term= k_H*T_H_term*S*(1.0-omega) # or pH like in the other scripts
+    
+    qtz_dissolution_rate = ( neutral_term + base_term + acid_term)
+    
+    return qtz_dissolution_rate 

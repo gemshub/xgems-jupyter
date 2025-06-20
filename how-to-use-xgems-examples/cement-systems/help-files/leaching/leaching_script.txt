@@ -1,0 +1,43 @@
+# writing the leaching script
+
+P=1e5 # 10 bar = 1e5 Pa
+T=20.0+273.15 # Temperatur in Kelvin
+
+# Initial dummy values
+aq_elements = xgEngine.elementAmounts().copy()
+aq_elements[:] = 1e-20
+aq_mass = 0.0
+
+# Equilibration loop
+for c in range(1, 10001):
+    xgEngine.setColdStart()
+
+    # Replace pore solution with fresh water
+    b_recipe_new = xgEngine.elementAmounts().copy()
+    b_recipe_new = b_recipe_new - aq_elements
+    b_recipe_new = b_recipe_new + b_water * aq_mass
+
+    code = xgEngine.equilibrate(T, P, b_recipe_new)
+    aq_volume = xgEngine.phaseVolume(phase_indexes['aq_gen']) * 1000  # m³ to L
+    aq_mass = xgEngine.phaseMass(phase_indexes['aq_gen'])  # kg
+    aq_elements = xgEngine.elementAmountsInPhase(phase_indexes['aq_gen'])
+    CSH_elements = xgEngine.elementAmountsInPhase(phase_indexes['CSHQ'])
+
+    # properties
+    properties_table['cycle'].append(c)
+    properties_table['Ca/Si in CSH'].append(CSH_elements[element_indexes['Ca']]/CSH_elements[element_indexes['Si']])
+    properties_table['pH'].append(xgEngine.pH())
+    properties_table['gems_code'].append(code)
+
+    # Aqueous species concentrations
+    for element in output_aqueous_elements:
+        index = element_indexes[element]
+        aqueous_table[element].append(1000*aq_elements[index] / aq_volume)
+
+    # Solid phase volumes
+    for phase, ndx_list in grouped_output_phase_indexes.items():
+        vol = sum(xgEngine.phaseVolume(ndx) for ndx in ndx_list)
+        solids_volume_table[phase].append(vol * 1e6)  # m³ to cm³
+
+    # This causes the printed line to be overwritten on each loop iteration, instead of printing a new line each time. 
+    print('\rcalculate for cycle', c, 'code', code, end='')   

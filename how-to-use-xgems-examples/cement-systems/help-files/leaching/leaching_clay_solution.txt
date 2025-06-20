@@ -1,0 +1,26 @@
+# restart the notebook and rerun all cells before
+# we define the solution b
+# in this case was taken from a compos record in GEMS
+# add 1.1*b_solution and 1000 cycles
+
+#  to limit the replacement when most of cement is leached 
+#    if aq_mass < 10:
+#        b_recipe_new = b_recipe_new + 1.1*b_solution * aq_mass
+#    else:
+#        b_recipe_new = b_recipe_new + 1.1*b_solution * 10
+
+b_solution = xgEngine.elementAmounts().copy()
+b_solution[:] = 1e-9
+# 1 kg clay solution
+b_solution[element_indexes['Al']] = 8.49E-09
+b_solution[element_indexes['C']] = 0.002069057
+b_solution[element_indexes['Ca']] = 2.67E-02
+b_solution[element_indexes['Cl']] = 0.239213086
+b_solution[element_indexes['Fe']] = 0.000110956
+b_solution[element_indexes['H']] = 109.1572
+b_solution[element_indexes['K']] = 0.00114057
+b_solution[element_indexes['Mg']] = 0.01516463
+b_solution[element_indexes['Na']] = 0.1986165
+b_solution[element_indexes['O']] = 54.66971
+b_solution[element_indexes['S']] = 0.02141914
+b_solution[element_indexes['Si']] = 0.000168709

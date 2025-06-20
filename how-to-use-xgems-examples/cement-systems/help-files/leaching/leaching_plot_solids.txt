@@ -1,0 +1,45 @@
+# Assume solid_data_volumes is a dictionary filled with lists of equal length
+# Extract the x-axis (cycle) and the y-values (each mineral phase)
+x = properties_table['cycle']
+
+# Y-values in correct order
+y_values = [solids_volume_table[phase] for phase in solids_volume_table]
+
+# Labels for legend
+labels = [phase for phase in solids_volume_table]  # You can make this prettier manually if needed
+
+# Color palette (optional): provide your own or use matplotlib defaults
+colors = plt.cm.tab20c(range(len(solids_volume_table)))  # or a custom list
+
+# Optional hatches, !!! lenght the same as output phases
+hatches = ['/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*', '//', 'xx', '\\\\', '||', '++', 'oo', '**', '..']
+
+# Create the stacked area plot
+fig, ax = plt.subplots(figsize=(12, 6))
+stacks = ax.stackplot(x, *y_values, labels=labels, colors=colors, alpha=0.8)
+
+# Apply hatching
+for stack, hatch in zip(stacks, hatches):
+    stack.set_hatch(hatch)
+
+# Axis labels and limits
+ax.set_xlabel('Cycle')
+ax.set_ylabel('Phase volume (cm$^3$/100 g cement)')
+ax.set_title('Solid Phase Volume Evolution During Leaching')
+#ax.set_xlim(min(x), max(x))
+#ax.set_ylim(0, max([sum(vals) for vals in zip(*y_values)]) * 1.1)
+ax.set_ylim(0, 100)
+ax.set_xscale('log')
+
+# Create a second y-axis for pH
+ax2 = ax.twinx()
+ax2.plot(x, properties_table['Ca/Si in CSH'], label='Ca/Si in CSH', color='black', linestyle='--')
+ax2.set_ylabel('Ca/Si in CSH')
+
+# Combine legends from both axes
+lines1, labels1 = ax.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax.legend(lines1 + lines2, labels1 + labels2, loc='upper right',  bbox_to_anchor=(1.35, 1.0), fontsize=10)
+
+plt.tight_layout()
+plt.show()

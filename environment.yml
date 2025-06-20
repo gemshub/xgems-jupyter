@@ -1,0 +1,11 @@
+name: xgems
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - xgems
+  - pandas
+  - matplotlib
+  - openpyxl
+  - jupyter

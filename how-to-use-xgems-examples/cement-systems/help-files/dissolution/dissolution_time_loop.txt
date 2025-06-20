@@ -1,0 +1,91 @@
+# use SI units
+year_to_seconds=365.25*24.0*3600.0
+
+# Temperature in Kelvin
+T=25.0+273.15
+
+# definitions for time discretization
+tend=5000.0 *year_to_seconds # unit seconds!!!
+delta_t=1.0 *year_to_seconds
+time = 0.0 # start
+
+time=time+delta_t # only for first time step
+code = 2
+
+# while loop
+while time <= tend :
+    print('\rcalculate for time = '+str(time/year_to_seconds)+' years', 'dt ', delta_t/year_to_seconds, 'code', code, end='')    
+
+    qtz_amount=xgEngine.speciesAmount(index_qtz) # curent amount 
+    omega = pow(10,xgEngine.phaseSatIndex(phase_indexes['Quartz'])) # omega of qtz
+    
+    aHplus = np.exp(xgEngine.lnActivities()[index_Hplus]) # activity of H+
+    aOHminus = np.exp(xgEngine.lnActivities()[index_OHminus]) # activity of OH-
+
+    #   we assume that we have much more aggregates than we need to reach equilibrium with Quartz, 
+    #   i.e. rounded grains change surface are not completely dissolved  
+    SurfaceArea=qtz_amount*9.065e-2 # specific surface area m2/mol Table 4.8 of NAB 18-05 1.5 mm spherical grains or so
+    
+    # we call the rate function
+    drate = qtz_dissolution_rate(T,SurfaceArea,omega,aHplus,aOHminus) 
+
+    # we calculate the low_limit dll_ for qtz
+    low_limit=qtz_amount-drate*delta_t
+    
+    # lower limit should be never below zero
+    if (low_limit < 0.0):
+        low_limit=0.0
+
+    if (np.log10(omega) < 0.0) :    # only change lower limit if dissolution happens
+        xgEngine.setSpeciesLowerLimit("Qtz",low_limit)
+    
+    # we run GEMS            
+    xgEngine.setColdStart()
+    code = xgEngine.equilibrate(T, P, b)
+
+    # check if GEMS calculation was succefful, if not try to imporve numerics and reequilibrate
+    if not (code == 2 or code == 6):  # 2 and 6 are  good solution ...3 is maybe good solution due to divergence problems
+        print('t , dt ',time,' ',delta_t,' rescaled limits and run again\n')
+        xgEngine.setSpeciesLowerLimit("Qtz",low_limit*0.99999999999999)
+        code =xgEngine.reequilibrate(False)
+        if not (code == 2):
+            print("Error: Problem with GEMS output code during equilibration table! at time returned code ",time,code)
+            print("for detailed error diagnostics look into ipmlog.txt")
+            print('t , dt ',time,' ',delta_t,' rate: ',drate,' SurfaceArea: ',SurfaceArea,' amount per dt: ',drate*dt)
+            print("bulk composition",xgEngine.elementAmounts())
+            print("dll",xgEngine.speciesLowerLimits())
+            time= 2*tend
+            outflag = False
+            break
+
+    ## store results
+    # copy from leaching example, change cycle to time, add rate
+    aq_volume = xgEngine.phaseVolume(phase_indexes['aq_gen']) * 1000  # m³ to L
+    aq_mass = xgEngine.phaseMass(phase_indexes['aq_gen'])  # kg
+    aq_elements = xgEngine.elementAmountsInPhase(phase_indexes['aq_gen'])
+    CSH_elements = xgEngine.elementAmountsInPhase(phase_indexes['CSHQ'])
+    
+    # properties
+    properties_table['time'].append(time/year_to_seconds)
+    properties_table['Ca/Si in CSH'].append(CSH_elements[element_indexes['Ca']]/CSH_elements[element_indexes['Si']])
+    properties_table['pH'].append(xgEngine.pH())
+    properties_table['gems_code'].append(code)
+    properties_table['rate'].append(drate)
+
+    # Aqueous species concentrations
+    for element in output_aqueous_elements:
+        index = element_indexes[element]
+        aqueous_table[element].append(1000*aq_elements[index] / aq_volume)
+
+    # Solid phase volumes
+    for phase, ndx_list in grouped_output_phase_indexes.items():
+        vol = sum(xgEngine.phaseVolume(ndx) for ndx in ndx_list)
+        solids_volume_table[phase].append(vol * 1e6)  # m³ to cm³
+
+    # increase the time
+    time=time+delta_t
+    # delta_t=delta_t*1.01
+    if time/year_to_seconds > 1000.0 : # accelerate time after 1000 years
+        delta_t = delta_t*1.01
+
+print("\neverything finished")

@@ -1,0 +1,37 @@
+# copy from leaching example, add 'Quartz': 'quartz',
+# lists of elements and phases
+element_symbols = ['Al', 'C', 'Ca', 'Cl', 'Fe', 'H', 'K', 'Mg', 'Na', 'O', 'S', 'Si', 'Zz']
+phase_names = {
+    'Quartz': 'quartz',
+    'CSHQ': 'CSH',
+    'ettringite': 'ettrignite',
+    'SO4_CO3_AFt': 'ettrignite',
+    'CO3_SO4_AFt': 'ettrignite',
+    'thaumasite': 'thaumasite',
+    'SO4_OH_AFm': 'monosulphate',
+    'OH_SO4_AFm': 'monosulphate',
+    'C4AcH11': 'monocarbonate',
+    'OH-hydrotalcite': 'hydrotalcite',
+    'Kuzels': 'Kuzel_s',
+    'Friedels': 'Friedel_s',
+    'straetlingite': 'straetlingite',
+    'Calcite': 'calcite',
+    'MSH': 'MSH',
+    'Gypsum': 'gypsum',
+    'Portlandite': 'portlandite',
+    'Natrolite': 'zeolites',
+    'ZeoliteX': 'zeolites',
+    'ZeoliteY': 'zeolites',
+    'ZeoliteP': 'zeolites',
+    'Chabazite': 'zeolites',
+    'C3(AF)S0.84H': 'hydrogarnet',
+    'C3FS1.34H3.32': 'hydrogarnet',
+    'Ferrihydrite-mc': 'ferryhidrite',
+    'Al(OH)3mic': 'Al(OH)3(mic)',
+    'aq_gen': 'aqueous',
+}
+
+# dictionary of element names and index
+element_indexes = {symbol: xgEngine.indexElement(symbol) for symbol in element_symbols}
+# dictionary of phase names and index
+phase_indexes = {name: xgEngine.indexPhase(name) for name in phase_names}

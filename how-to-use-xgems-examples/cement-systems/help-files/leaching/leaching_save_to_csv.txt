@@ -1,0 +1,14 @@
+import pandas as pd
+
+# Convert dicts to DataFrames
+df_properties = pd.DataFrame(properties_table)
+df_aqueous = pd.DataFrame(aqueous_table)
+df_solids = pd.DataFrame(solids_volume_table)
+
+# Concatenate them side-by-side
+combined_df = pd.concat([df_properties, df_aqueous, df_solids], axis=1)
+
+# Write to CSV
+combined_df.to_csv('combined_data.csv', index=False)
+
+print("Combined data written to combined_data.csv")

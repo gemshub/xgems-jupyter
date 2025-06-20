@@ -1,0 +1,30 @@
+# copy from leaching example and change cycle to time
+# plot the results
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.rcParams.update({'font.size': 15})
+
+# Create plot
+fig, ax1 = plt.subplots(figsize=(7, 5))
+
+for elem in output_aqueous_elements:
+    ax1.plot(properties_table['time'], aqueous_table[elem], label=elem)
+
+ax1.set_xlabel('time (years)')
+ax1.set_ylabel('total conc. in solution (mmol/l)')
+ax1.set_title('quartz dissolution')
+ax1.grid(True)
+#ax1.set_xscale('log')
+
+ax2 = ax1.twinx()
+ax2.plot(properties_table['time'], properties_table['pH'], label='pH', color='black', linestyle='--')
+ax2.set_ylabel('pH')
+
+
+lines1, labels1 = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper right')
+
+plt.tight_layout()
+plt.show()
