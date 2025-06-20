@@ -6,7 +6,7 @@ xGEMS examples using Jupyter notebooks
 
 Using Jupyter Lab Notebooks and Binder. This is just a demo and the work will be lost once you close your browser.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gemshub/xgems-jupyter/master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gemshub/xgems-jupyter/main?urlpath=lab/tree/how-to-use-xgems-examples.ipynb)  
 
 Wait until the Jupyter Lab Notebook server starts (~1 min) then double click on any `how-to-...` tutorial notebook.
 
