@@ -1,6 +1,6 @@
 # xgems-jupyter
 
-xGEMS examples using Jupyter notebooks
+[xGEMS](https://gemshub.github.io/site/start/gemstandalone/download/#xgems) examples using Jupyter notebooks
 
 ## Try xGEMS (demo) in your browser
 
@@ -38,6 +38,6 @@ jupyter lab
 
 ## xGEMS examples
 
-This repository contains examples of uses cases and functionality of xGEMS. Additional information about the methods and data used in xGEMS you can find [here](https://thermohub.org/xGEMS/xGEMS) or on the github [repository](https://github.com/thermohub/xGEMS).
+This repository contains examples of uses cases and functionality of xGEMS. Additional information about the methods and data used in xGEMS you can find in the [documentation](https://xgems.readthedocs.io/en/latest/) or [repository](https://bitbucket.org/gems4/xgems).
 
 Start with how-to-use-xgems-examples.ipynb or look in the folder how-to-use-xgems-examples. 
