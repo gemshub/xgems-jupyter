@@ -26,7 +26,7 @@ In the Linux/MacOS terminal or Windows miniconda/miniforge command prompt or ter
 conda env create -f environment.yml
 conda activate xgems
 ``` 
-First command will create the `xgems` conda environment congaing all the necessary libraries to run xGEMS and associated codes. The second command will activate the environment and your terminal line should show `xgems`. The third command installs jupyter lab in this environment.
+First command will create the `xgems` conda environment congaing all the necessary libraries to run xGEMS and associated codes. The second command will activate the environment and your terminal line should show `xgems`.
 
 ### Start jupyter lab
 
