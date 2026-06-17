@@ -1,0 +1,133 @@
+
+#  GEMS3K v.4.5.1 (ChemicalFun v.0.1.13, ThermoFun v.0.6.0) c.---
+# Comments can be marked with # $ ; as the first character in the line
+# DBR text input file for node system recipe and speciation data
+# (should be read only after the DCH and the IPM files)
+
+# (1): Flags controlling GEM IPM-3 operation and data exchange
+# NodeHandle: Node identification handle
+<NodeHandle>  0
+# NodeTypeHY:  Node type code (hydraulic), not used on TNode level; see typedef NODETYPE
+<NodeTypeHY>  0
+# NodeTypeMT:  Node type (mass transport), not used on TNode level; see typedef NODETYPE
+<NodeTypeMT>  0
+# NodeStatusFMT:  Node status code in FMT part, not used on TNode level; see typedef NODECODEFMT
+<NodeStatusFMT>  -1
+# NodeStatusCH: Node status code and control in GEM input and output; see typedef NODECODECH
+<NodeStatusCH>  1
+# IterDone:  Number of iterations performed by GEM IPM in the last run (GEM output)
+<IterDone>  57
+
+## (2) Chemical scalar properies of the node system
+# TK: Node temperature T, Kelvin. This value must always be provided (GEM input)
+<TK>  298.15
+# P:  Node Pressure P, Pa. This value must always be provided (GEM input)
+<P>  100000
+# Vs: Volume V of reactive subsystem, m3 (GEM output)
+<Vs>  0
+# Vi: Volume of inert subsystem, m3 (mass transport)
+<Vi>  0
+# Ms: Mass of reactive subsystem, kg (GEM output)
+<Ms>  1.19163001192245
+# Mi: Mass of inert subsystem, kg (mass transport)
+<Mi>  0
+# Hs: Total enthalpy of reactive subsystem, J (reserved)
+<Hs>  0
+# Hi: Total enthalpy of inert subsystem, J (reserved, mass transport) 
+<Hi>  0
+# Gs: Total Gibbs energy of the reactive subsystem, J/(RT) (GEM output)
+<Gs>  7777777
+# IS: Effective aqueous ionic strength, molal (GEM output)
+<IS>  0.10000233101685
+# pH: pH of aqueous solution in molal activity scale (GEM output)
+<pH>  5.8924893325152
+# pe: pe of aqueous solution in molal activity scale (GEM output)
+<pe>  -5.10658222587289
+# Eh: Eh of aqueous solution, V (GEM output)
+<Eh>  -0.301494423539276
+# Tm: Actual total simulation time, s (kinetics, metastability, transport)
+<Tm>  0
+# dt: Actual time step, s (kinetics, metastability, transport)
+<dt>  0
+
+### Arrays: for dimensions and index lists, see Section (2) of DCH file
+
+## (4) Data for Independent Components
+#  'Cl' 'Clay' 'H' 'Na' 'O' 'Pbuff' 'U' 'Zz' 
+# bIC: Bulk composition of reactive subsystem (main GEM input), moles of ICs [nICb]
+<bIC>
+1.1 0.1 112.016746657646 0.2 57.5085733288231 2 0.0001 0 
+
+# rMB: Mass balance residuals, moles (GEM output) [nICb]
+<rMB>
+0 0 0 0 0 0 0 0 
+
+# uIC: Chemical potentials of ICs in equilibrium (dual solution), J/(RT) (GEM output) [nICb]
+<uIC>
+0 0 0 0 0 0 0 0 
+
+# bSP: Output bulk composition of the equilibrium solid part of the system, moles 
+<bSP>
+0.999997140731099 0.0999999999999999 1.99999999662604e-06 3.99999999997511e-05 1.00004036859134 0.0999999999999999 2.00024199160838 2 
+
+## (5) Data for Dependent Components
+#  'Na+' 'NaOH@' 'U(OH)2+2' 'U(OH)3+' 'U(OH)4@' 'U+4' 'UCl+3' 'UOH+3' 'UO2+' '(UO2)2(OH)+3' '(UO2)2(OH)2+2' '(UO2)3(OH)4+2' '(UO2)3(OH)5+' '(UO2)3(OH)7-' '(UO2)4(OH)7+' 'UO2(OH)2@' 'UO2(OH)3-' 'UO2(OH)4-2' 'UO2+2' 'UO2Cl+' 'UO2Cl2@' 'UO2OH+' 'ClO4-' 'Cl-' 'H2@' 'O2@' 'OH-' 'H+' 'H2O@' 'H2' 'O2' 'ClayNa@' 'ClayUO2@' 'pHbufferO' 'pHbufferOHCl' 'UO2(am,hyd)' 'metaschoepite' 
+# xDC: Speciation - amounts of DCs in equilibrium (primal solution), moles (GEM output/input) [nDCb]
+<xDC>
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+
+# gam: Activity coefficients of DCs in their respective phases (GEM output/input) [nDCb]
+<gam>
+0.780686963073964 0.999993538403504 0.37146348319973 0.780686963073964 0.999993538403504 0.0190402622513661 0.107724575916421 0.107724575916421 0.780686963073964 0.107724575916421 0.37146348319973 0.37146348319973 0.780686963073964 0.780686963073964 0.780686963073964 0.999993538403504 0.780686963073964 0.37146348319973 0.37146348319973 0.780686963073964 0.999993538403504 0.780686963073964 0.780686963073964 0.780686963073964 0.999993538403504 0.999993538403504 0.780686963073964 0.780686963073964 0.999987061335232 1 1 1 1 1 1 1 1 
+
+# dll: Lower metastability restrictions on amounts of DCs, moles (GEM input) [nDCb]
+<dll>
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+
+# dul: Upper metastability constraints on amounts of DCs, moles (GEM input) [nDCb]
+<dul>
+1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 
+
+## (6) Data for Phases
+#  'aq_gen' 'gas_gen' 'MontX' 'pHbufferO' 'pHbufferOHCl' 'UO2(am,hyd)' 'Metaschoepite' 
+# aPH: Specific surface areas of phases, m2/kg (GEM input) [nPHb]
+<aPH>
+0 0 0 0 0 0 0 
+
+# xPH: Amounts of phases in equilibrium state, moles (GEM output) [nPHb]
+<xPH>
+55.7083568252872 0 0.1 4.2e-05 1.0000028592689 0.999997140731099 9.99958041916722e-05 
+
+# vPS: Volumes of multicomponent phases, m3 (GEM output) [nPSb]
+<vPS>
+0.00100456045050116 0 3.16261004287698e-22 
+
+# mPS: Masses of multicomponent phases, kg (GEM output) [nPSb]
+<mPS>
+1.00584366969977 0.0170073500871658 0.117298979949951 
+
+# xPA: Amount of carrier (sorbent or solvent) in multicomponent phases, moles (GEM output) [nPSb]
+<xPA>
+55.508331311133 0 0 
+
+# amru: Upper AMRs on amounts of multi-component phases (mol) [nPSb]  
+<amru>
+1000000 1000000 1000000 
+
+# amrl: Lower AMRs on amounts of multi-component phases (mol) [nPSb]
+<amrl>
+0 0 0 
+
+# omPH: stability (saturation) indices of phases in log10 scale, can change in GEM [nPHb] 
+<omPH>
+-1.42837293557352e-09 -1.571814211549 1.92865493310657e-16 0.000447518306655171 -7.28965340915802e-08 7.28969722931485e-08 5.63306611000327e-06 
+
+# bPS: Bulk elemental compositions of multicomponent phases, moles (GEM output) [nPSb*nICb]
+#  'Cl' 'Clay' 'H' 'Na' 'O' 'Pbuff' 'U' 'Zz' 
+<bPS>
+0.100002859268901 0 0 0 111.016706289055 0.1 55.5083313372147 0 
+0 0 0 0 0 0 0 0 
+0 0.0999999999999999 0 0 0 0.0999999999999999 0 0 
+
+# End of file
+

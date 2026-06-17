@@ -1,0 +1,94 @@
+{
+  "system_file": "gems_files/mortar-dat.lst",
+  "temperature_K": 298.15,
+  "temperature_C": 25.0,
+  "t_end_years": 5000.0,
+  "dt_initial_years": 1.0,
+  "materials": [
+    "QuartzTST"
+  ],
+  "hooks": [],
+  "composition_override": {
+    "species_lower_limits": {
+      "Qtz": 26.679
+    },
+    "species_upper_limits": {},
+    "bulk_elements": {}
+  },
+  "aqueous_elements": [
+    "Ca",
+    "Si",
+    "Al",
+    "Mg",
+    "S",
+    "C"
+  ],
+  "phase_groups": {
+    "quartz": [
+      "Quartz"
+    ],
+    "CSH": [
+      "CSHQ"
+    ],
+    "ettringite": [
+      "ettringite",
+      "SO4_CO3_AFt",
+      "CO3_SO4_AFt"
+    ],
+    "thaumasite": [
+      "thaumasite"
+    ],
+    "monosulphate": [
+      "SO4_OH_AFm",
+      "OH_SO4_AFm"
+    ],
+    "monocarbonate": [
+      "C4AcH11"
+    ],
+    "hydrotalcite": [
+      "OH-hydrotalcite"
+    ],
+    "Kuzel_s": [
+      "Kuzels"
+    ],
+    "Friedel_s": [
+      "Friedels"
+    ],
+    "straetlingite": [
+      "straetlingite"
+    ],
+    "calcite": [
+      "Calcite"
+    ],
+    "MSH": [
+      "MSH"
+    ],
+    "gypsum": [
+      "Gypsum"
+    ],
+    "portlandite": [
+      "Portlandite"
+    ],
+    "zeolites": [
+      "Natrolite",
+      "ZeoliteX",
+      "ZeoliteY",
+      "ZeoliteP",
+      "Chabazite"
+    ],
+    "hydrogarnet": [
+      "C3(AF)S0.84H",
+      "C3FS1.34H3.32"
+    ],
+    "ferrihydrite": [
+      "Ferrihydrite-mc"
+    ],
+    "Al(OH)3(mic)": [
+      "Al(OH)3mic"
+    ]
+  },
+  "run_name": "run_20260616_174958",
+  "saved_at": "2026-06-16T17:49:58",
+  "n_timesteps": 1373,
+  "n_failed_steps": 0
+}
