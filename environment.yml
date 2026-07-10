@@ -5,7 +5,7 @@ dependencies:
   - python=3.10
   - numpy
   - scipy
-  - xgems
+  - xgems=2.1.1
   - pandas
   - matplotlib
   - openpyxl
