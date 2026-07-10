@@ -2,7 +2,7 @@ name: xgems
 channels:
   - conda-forge
 dependencies:
-  - python=3.14
+  - python=3.13
   - numpy
   - scipy
   - xgems=2.1.1
